@@ -20,5 +20,4 @@ class Profesor(models.Model):
 class Entregable(models.Model):
     nombre = models.CharField(max_length=40)
     fechaDeEntrega = models.DateField()
-    curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
     entregado = models.BooleanField()
