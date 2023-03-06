@@ -1,0 +1,36 @@
+{% extends "padre.html" %}
+{% load static %}
+
+
+
+{% block headers %}
+
+<h1 class="mb-5">Formulario de Cursos</h1>
+<h2>Django - CoderHouse</h2>
+
+{% endblock %}
+
+{% block contendidoDinamico %}
+
+
+<body>
+    
+
+    {%if miFormulario.errors%}
+    <p style="color: red;">algo va mal</p>
+    {%endif%}
+
+    
+
+     <form action="/AppCoder/" method="post">  {%csrf_token%}   
+        <table>
+
+            {{miFormulario.as_table}}
+
+        </table>
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+    
+
+{% endblock %}
