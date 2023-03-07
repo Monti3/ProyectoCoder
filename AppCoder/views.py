@@ -96,7 +96,7 @@ def BusquedaCamada(request):
 def buscar(request):
     if request.GET['camada']:
         camada = request.GET['camada']
-        cursos = Curso.objects.filter(camada__icontains=camada)
+        cursos = Curso.objects.filter(camada=camada)
         return render(request, 'resultadosBusqueda.html', {'cursos': cursos, 'camada': camada})       
     else:
         respuesta = 'No ingresaste ninguna camada'
