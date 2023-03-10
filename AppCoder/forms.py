@@ -1,6 +1,6 @@
 from django import forms
  
- # formularios de la aplicacion
+ # Formularios de la base de datos
  
 class CursoFormulario(forms.Form):
     curso = forms.CharField()

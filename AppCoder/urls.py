@@ -1,7 +1,6 @@
 from django.urls import path
 from AppCoder import views
 
-# acá se definen las rutas de la aplicacion
 urlpatterns = [
     path('', views.inicio, name="Inicio"),
     path('cursos/', views.cursos, name="Cursos"),

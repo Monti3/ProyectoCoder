@@ -30,7 +30,7 @@ def cursoFormulario(request): # funcion para crear un curso
     if request.method == "POST": # si se envia un formulario
  
         miFormulario = CursoFormulario(request.POST) # Aqui me llega la informacion del html
-        if miFormulario.is_valid: # si el formulario es valido
+        if miFormulario.is_valid(): # si el formulario es valido
             informacion = miFormulario.cleaned_data # guardo los datos del formulario en una variable
             curso = Curso(nombre=informacion["curso"], camada=informacion["camada"]) # creo un objeto de tipo Curso y le paso los datos del formulario
             curso.save() # guardo el curso en la base de datos
@@ -45,7 +45,7 @@ def profesorFormulario(request): # funcion para crear un profesor
 
         miFormulario = ProfesorFormulario(request.POST) # creo un objeto de tipo ProfesorFormulario y le paso el request
 
-        if miFormulario.is_valid: # si el formulario es valido
+        if miFormulario.is_valid(): # si el formulario es valido
 
             informacion = miFormulario.cleaned_data # guardo los datos del formulario en una variable
  
@@ -65,7 +65,7 @@ def profesorFormulario(request): # funcion para crear un profesor
 def estudianteFormulario(request):
     if request.method == "POST": # si se envia un formulario
         miFormulario = EstudianteFormulario(request.POST) # creo un objeto de tipo EstudianteFormulario y le paso el request
-        if miFormulario.is_valid: # si el formulario es valido
+        if miFormulario.is_valid(): # si el formulario es valido
             informacion = miFormulario.cleaned_data # guardo los datos del formulario en una variable
             estudiante = Estudiante(nombre=informacion["nombre"], apellido=informacion["apellido"], email=informacion["email"]) # creo un objeto de tipo Estudiante y le paso los datos del formulario
             estudiante.save() # guardo el estudiante en la base de datos
@@ -79,7 +79,7 @@ def entregableFormulario(request):
     # si se envia un formulario
     if request.method == "POST":
         miFormulario = EntregableFormulario(request.POST) # creo un objeto de tipo EntregableFormulario y le paso el request
-        if miFormulario.is_valid:  # si el formulario es valido
+        if miFormulario.is_valid():  # si el formulario es valido
             informacion = miFormulario.cleaned_data # guardo los datos del formulario en una variable
             entregable = Entregable(nombre=informacion["nombre"], fechaDeEntrega=informacion["fechaDeEntrega"], entregado=informacion["entregado"]) # creo un objeto de tipo Entregable y le paso los datos del formulario
             entregable.save() # guardo el entregable en la base de datos

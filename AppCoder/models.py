@@ -1,11 +1,9 @@
 from django.db import models
 
 # Create your models here.
+# Moodelos de la base de datos
 
-# modelos de la base de datos
-
-
-class Curso(models.Model):          
+class Curso(models.Model):
     nombre = models.CharField(max_length=40)
     camada = models.IntegerField()
 
