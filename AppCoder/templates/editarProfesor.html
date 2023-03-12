@@ -1,0 +1,26 @@
+
+{% extends "padre.html" %}
+{% load static %}
+
+
+
+{% block headers %}
+
+<h1 class="mb-5">Editar Profesor</h1>
+<h2>Django - CoderHouse</h2>
+
+{% endblock %}
+
+{% block contendidoDinamico %}
+    {% if miFormulario.errors %}
+    <p style="color:red;"> Están mal los datos, revisar. </p>
+    {% endif %}
+
+    <form action="" method="POST">{% csrf_token %}
+        
+        <table>
+            {{ miFormulario.as_table }}
+        </table>
+        
+        <input type="submit" value="Enviar">
+{% endblock %}

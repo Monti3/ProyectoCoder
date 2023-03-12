@@ -1,0 +1,16 @@
+{% extends "padre.html" %}
+{% load static %}
+{%block headers%}
+
+    <h1 class="mb-5">Curso - {{curso.nombre}}</h1>
+    <h2>Django - Coderhouse</h2> 
+
+{%endblock%}
+{% block contendidoDinamico %}
+<body>
+    <p>Nombre del Curso: <i>{{ curso.nombre }}</i></p>
+    <p>Camada: <i>{{ curso.camada }}</i></p>
+    <P>
+        <a href="{% url 'AppCoder:List' %}">Regresar</a>
+    </P>
+    {% endblock %}

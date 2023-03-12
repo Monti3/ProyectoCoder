@@ -3,7 +3,16 @@ from django.http import HttpResponse
 from django.template import loader
 from AppCoder.forms import CursoFormulario, EstudianteFormulario, ProfesorFormulario, EntregableFormulario
 from AppCoder.models import Curso, Estudiante, Entregable, Profesor
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
+from django.views.generic.edit import UpdateView
+from django.views.generic.edit import DeleteView
 
+
+
+App_name = 'AppCoder'
 # Create your views here.
 
 # funciones de la aplicacion
@@ -106,3 +115,66 @@ def buscar(request):
         respuesta = 'No ingresaste ninguna camada' 
 
     return HttpResponse(respuesta)
+
+def leerProfesores(request): # funcion para leer los profesores
+    profesores = Profesor.objects.all() # guardo todos los profesores en una variable
+    contexto = {'profesores': profesores} # creo un contexto con los profesores
+    return render(request, 'leerProfesores.html', contexto) # hago un render de la pagina leerProfesores.html y le paso los profesores
+
+def eliminarProfesor(request, profesor_nombre):
+    profesor = Profesor.objects.get(nombre=profesor_nombre)
+    profesor.delete()
+
+    profesores = Profesor.objects.all()
+    contexto = {"profesores":profesores}
+    return render(request, "leerProfesores.html", contexto)
+
+def editarProfesor(request, profesor_nombre):
+    profesor = Profesor.objects.get(nombre=profesor_nombre)
+    if request.method == 'POST':
+        miFormulario = ProfesorFormulario(request.POST)
+        print(miFormulario)
+
+        if miFormulario.is_valid:
+            informacion = miFormulario.cleaned_data
+
+            profesor.nombre = informacion['nombre']
+            profesor.apellido = informacion['apellido']
+            profesor.email = informacion['email']
+            profesor.profesion = informacion['profesion']
+
+            profesor.save()
+            return render(request, "inicio.html")
+    else:
+        miFormulario = ProfesorFormulario(initial={'nombre':profesor.nombre, 
+                                                   'apellido':profesor.apellido, 
+                                                   'email':profesor.email, 
+                                                   'profesion':profesor.profesion})
+        return render(request, "editarProfesor.html", 
+                      {"miFormulario":miFormulario, "profesor_nombre":profesor_nombre})
+
+
+class CursoList(ListView):
+    model = Curso
+    template_name = "cursos_list.html"
+
+class CursoDetalle(DetailView):
+    model = Curso
+    template_name = "curso_detalle.html"
+
+class CursoCreacion(CreateView):
+    model = Curso
+    template_name = "cursos_form.html"
+    success_url = reverse_lazy("AppCoder:List")
+    fields = ['nombre', 'camada']
+
+class CursoUpdate(UpdateView):
+    model = Curso
+    success_url = "/AppCoder/curso/list"
+    template_name = "cursos_form.html"
+    fields = ['nombre', 'camada']
+
+class CursoDelete(DeleteView):
+    model = Curso
+    template_name = "curso_confirm_delete.html"
+    success_url = "/AppCoder/curso/list"

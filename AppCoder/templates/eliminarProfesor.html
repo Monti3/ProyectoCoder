@@ -1,0 +1,25 @@
+
+{% extends "padre.html" %}
+{% load static %}
+
+
+
+{% block headers %}
+
+<h1 class="mb-5">Eliminar Profesor</h1>
+<h2>Django - CoderHouse</h2>
+
+{% endblock %}
+
+{% block contendidoDinamico %}
+
+    {%for p in profesores%}
+        <li>{{p}}</li>
+        <button>
+            <a href="{% url 'eliminarProfesor' p.nombre %}">Eliminar</a>
+        </button>
+
+    {%endfor%}
+    <a href="profesores">Agregar otro profesor</a>
+    
+{% endblock %}

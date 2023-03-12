@@ -1,0 +1,26 @@
+{% extends "padre.html" %}
+{% load static %}
+{%block headers%}
+
+    <h1 class="mb-5">Cursos</h1>
+    <h2>Django - CoderHouse</h2> 
+
+{%endblock%}
+
+{% block contendidoDinamico %}
+
+
+
+
+        {% for curso in object_list %}
+            
+            <li>{{ curso.nombre }}</li>
+                <p>
+                    <a href="{% url 'AppCoder:Detail' curso.id %}">Ver</a>
+                    <a href="{% url 'AppCoder:Edit' curso.id %}">Editar</a>
+                    <a href="{% url 'AppCoder:Delete' curso.id %}">Borrar</a>
+                </p>
+
+        {% endfor %}
+    
+{% endblock %}

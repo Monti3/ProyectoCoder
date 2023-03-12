@@ -1,0 +1,37 @@
+
+{% extends "padre.html" %}
+{% load static %}
+
+
+
+{% block headers %}
+
+<h1 class="mb-5">Resultados de su busqueda</h1>
+<h2>Django - CoderHouse</h2>
+
+{% endblock %}
+
+{% block contendidoDinamico %}
+<form action="/AppCoder/leerProfesores/" method="GET">
+
+
+
+    {%if profesores%}
+        
+    {%for p in profesores%}
+        <li>{{p}}</li>
+        <button>
+            <a href="{% url 'AppCoder:EliminarProfesor' p.nombre %}">Eliminar</a>
+        </button>
+        <button>
+            <a href="{% url 'AppCoder:EditarProfesor' p.nombre %}">Editar</a>
+        </button>
+    {%endfor%}
+    {%else%}
+        <p>No se encontraron resultados</p>
+    {%endif%}
+    <br>
+    <a href="{% url 'AppCoder:ProfesorFormulario' %}">Agregar Profesor</a>
+    
+</form> 
+{% endblock %}

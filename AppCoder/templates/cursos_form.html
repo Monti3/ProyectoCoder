@@ -1,0 +1,20 @@
+{% extends "padre.html" %}
+{% load static %}
+{%block headers%}
+
+    <h1 class="mb-5">Editar Curso - {{curso.nombre}}</h1>
+    <h2>Django - CoderHouse</h2> 
+
+{%endblock%}
+{% block contendidoDinamico %}
+    
+
+
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <input type="submit" value="Enviar" />
+    </form>
+
+    {% endblock %}
